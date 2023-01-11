@@ -1,0 +1,26 @@
+.result-container {
+  border: 2px solid white;
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  margin-left: -18px;
+}
+
+.details-box {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.details-box p {
+  margin: 0;
+}
+
+/* ----MOBILE------ */
+@media screen and (max-width: 576px) {
+  .result-container {
+    width: 90%;
+    padding: 30px 60px;
+    margin-left: -50px;
+  }
+}
