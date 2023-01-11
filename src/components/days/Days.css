@@ -1,10 +1,14 @@
+.body {
+  background-color: rgb(253, 193, 64);
+}
 .days-container {
   /* max-width: 570px; */
   width: 100%;
+  border: 4px solid rgb(253, 253, 253);
   border-radius: 10px;
-  padding: 30px 43px;
+  padding: 20px 37px;
   background-color: rgb(253, 193, 64);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
   margin-left: -13px;
 }
 
