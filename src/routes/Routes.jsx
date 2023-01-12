@@ -8,7 +8,7 @@ import WordMatch from "../components/word-match/WordMatch";
 
 export const router = createBrowserRouter([
   {
-    path: "/home",
+    path: "/",
     element: <Home></Home>,
   },
   {

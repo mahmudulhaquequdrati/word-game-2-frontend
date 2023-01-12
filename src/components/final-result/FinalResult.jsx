@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import BtnComponent from "../stopwatch/btn-component/BtnComponent";
+import Display from "../stopwatch/display/Display";
 import "./FinalResult.css";
 
 const FinalResult = () => {
@@ -17,7 +19,6 @@ const FinalResult = () => {
         </div>
         <div>
           <p>Total time</p>
-          <p>01:02:07</p>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ const Home = () => {
       <div className="home-container">
         <h3>Pass Gas</h3>
         <p>Press Go to start the clock</p>
-        <Link>
+        <Link to="/word-match">
           <button>Go</button>
         </Link>
       </div>
