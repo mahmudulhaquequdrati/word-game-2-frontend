@@ -1,14 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+    navigate("/days");
   };
 
   return (
@@ -18,8 +21,18 @@ const Login = () => {
         <div className="form login">
           <h3>Login</h3>
           <form onSubmit={handleSubmit}>
-            <input type="text " placeholder="Email address" required />
-            <input type="password" placeholder="Password" required />
+            <input
+              name="email"
+              type="text"
+              placeholder="Email address"
+              required
+            />
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              required
+            />
 
             <input type="submit" value="login" />
           </form>

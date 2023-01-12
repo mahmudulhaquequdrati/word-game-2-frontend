@@ -6,13 +6,13 @@
   border-radius: 10px;
   padding: 20px 30px;
   padding-top: 100px;
-  background-color: #ffa500;
+  background-color: #fdd994;
   /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
 }
 
 .home-container button {
   background-color: aliceblue;
-  color: rgb(236, 134, 0);
+  color: #fdd994;
   font-weight: bold;
   border: none;
   padding: 15px 50px;
