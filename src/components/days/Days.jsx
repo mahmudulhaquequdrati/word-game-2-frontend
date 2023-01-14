@@ -1,7 +1,9 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Days.css";
 
 const Days = () => {
+  const navigate = useNavigate();
   const days = [
     {
       day: "1",
@@ -31,7 +33,9 @@ const Days = () => {
         <div className="day-content">
           {" "}
           {days.map((day) => (
-            <button className="days-btn">Day {day.day}</button>
+            <Link to="/word-match">
+              <button className="days-btn">Day {day.day}</button>
+            </Link>
           ))}
         </div>
       </div>
