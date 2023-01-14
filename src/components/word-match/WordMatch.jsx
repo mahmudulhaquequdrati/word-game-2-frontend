@@ -60,11 +60,6 @@ const WordMatch = () => {
 
   const resume = () => start();
 
-  function handleChange(event) {
-    const texts = event.target.value;
-    setText(texts);
-  }
-
   //*!Game Word Match Function
   const [playable, setPlayable] = useState(true);
   const [correctLetters, setCorrectLetters] = useState([]);

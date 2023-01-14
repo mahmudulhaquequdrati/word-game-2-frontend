@@ -1,7 +1,6 @@
 import React from "react";
 
 const BtnComponent = (props) => {
-  console.log(props.text);
   return (
     <div>
       <div>

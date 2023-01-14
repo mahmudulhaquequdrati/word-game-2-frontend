@@ -5,7 +5,7 @@ import Home from "../components/home/Home";
 
 import Login from "../components/login/Login";
 import Register from "../components/register/Register";
-import Test from "../components/test-css/Test";
+
 import WordMatch from "../components/word-match/WordMatch";
 
 export const router = createBrowserRouter([
@@ -32,9 +32,5 @@ export const router = createBrowserRouter([
   {
     path: "/result",
     element: <FinalResult></FinalResult>,
-  },
-  {
-    path: "/test",
-    element: <Test></Test>,
   },
 ]);
