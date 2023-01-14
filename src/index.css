@@ -28,7 +28,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  /* min-height: 100vh; */
+  min-height: 100vh;
 
   background-image: linear-gradient(to right, #4e54c8, #4355f8ee);
   width: 100%;
