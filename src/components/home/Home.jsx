@@ -4,8 +4,9 @@ import "./Home.css";
 
 const Home = () => {
   return (
-    <div className="body">
-      <div className="home-container">
+    <div>
+      <h1>ok</h1>
+      <div className="context">
         <h3>Pass Gas</h3>
         <p>Press Go to start the clock</p>
         <Link to="/word-match">
