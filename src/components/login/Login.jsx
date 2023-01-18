@@ -11,6 +11,7 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+    localStorage.setItem("user", true);
     navigate("/days");
   };
 
@@ -25,13 +26,13 @@ const Login = () => {
               name="email"
               type="text"
               placeholder="Email address"
-              required
+              // required
             />
             <input
               name="password"
               type="password"
               placeholder="Password"
-              required
+              // required
             />
 
             <input type="submit" value="login" />

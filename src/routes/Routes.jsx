@@ -8,11 +8,14 @@ import Register from "../components/register/Register";
 
 import WordMatch from "../components/word-match/WordMatch";
 
+const user = localStorage.getItem("user") ? true : false;
+
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home></Home>,
+    element: user ? <Days></Days> : <Login></Login>,
   },
+  { path: "/home", element: <Home></Home> },
   {
     path: "/login",
     element: <Login></Login>,

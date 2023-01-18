@@ -33,7 +33,7 @@ const Days = () => {
         <div className="day-content">
           {" "}
           {days.map((day) => (
-            <Link to="/">
+            <Link to="/home">
               <button className="days-btn">Day {day.day}</button>
             </Link>
           ))}

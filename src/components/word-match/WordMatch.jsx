@@ -44,7 +44,12 @@ const WordMatch = () => {
       updatedMs = 0;
     }
     updatedMs++;
-    return setTime({ ms: updatedMs, s: updatedS, m: updatedM, h: updatedH });
+    return setTime({
+      ms: updatedMs,
+      s: updatedS,
+      m: updatedM,
+      h: updatedH,
+    });
   };
 
   const stop = () => {
