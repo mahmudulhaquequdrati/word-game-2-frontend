@@ -6,44 +6,46 @@ const words = ["BAR"];
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
 const WordMatch = () => {
-//  -----------stop wacht code stard-------- //
-const [time, setTime] = useState({
-  hours: 0,
-  minutes: 0,
-  seconds: 0,
-});
-const [isRunning, setIsRunning] = useState(true);
-useEffect(() => {
-  let intervalId = null;
-  if (isRunning) {
-    intervalId = setInterval(() => {
-      setTime(prevTime => {
-        let { hours, minutes, seconds } = prevTime;
-        seconds++;
-        if (seconds === 60) {
-          seconds = 0;
-          minutes++;
-        }
-        if (minutes === 60) {
-          minutes = 0;
-          hours++;
-        }
-        return { hours, minutes, seconds };
-      });
-    }, 1000);
-  } else if (!isRunning && time !== 0) {
-    clearInterval(intervalId);
-  }
-  return () => clearInterval(intervalId);
-}, [isRunning, time]);
+  //  -----------stop wacht code stard-------- //
+  const [time, setTime] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+  const [isRunning, setIsRunning] = useState(true);
+  useEffect(() => {
+    let intervalId = null;
+    if (isRunning) {
+      intervalId = setInterval(() => {
+        setTime((prevTime) => {
+          let { hours, minutes, seconds } = prevTime;
+          seconds++;
+          if (seconds === 60) {
+            seconds = 0;
+            minutes++;
+          }
+          if (minutes === 60) {
+            minutes = 0;
+            hours++;
+          }
+          return { hours, minutes, seconds };
+        });
+      }, 1000);
+    } else if (!isRunning && time !== 0) {
+      clearInterval(intervalId);
+    }
+    return () => clearInterval(intervalId);
+  }, [isRunning, time]);
 
-
-const  handleSave = () => {
-  let currentTime = `${time.hours.toString().padStart(2, "0")} : ${time.minutes.toString().padStart(2, "0")} : ${time.seconds.toString().padStart(2, "0")}`;
-  return currentTime;
-}
-// ---------------- stop wacht code end----------\\
-
+  const handleSave = () => {
+    let currentTime = `${time.hours
+      .toString()
+      .padStart(2, "0")} : ${time.minutes
+      .toString()
+      .padStart(2, "0")} : ${time.seconds.toString().padStart(2, "0")}`;
+    return currentTime;
+  };
+  // ---------------- stop wacht code end----------\\
 
   //*!Game Word Match Function
   const [playable, setPlayable] = useState(true);
@@ -60,7 +62,7 @@ const  handleSave = () => {
           if (!correctLetters.includes(letter)) {
             setCorrectLetters((currentLetters) => [...currentLetters, letter]);
           } else {
-            alert("ok");
+            // alert("ok");
           }
         } else {
           if (!wrongLetters.includes(letter)) {
@@ -122,7 +124,9 @@ const  handleSave = () => {
       {/*-------------------------- StopWatch Section---------------------------- */}
       <div>
         <h4>
-          {time.hours.toString().padStart(2, "0")} : {time.minutes.toString().padStart(2, "0")} : {time.seconds.toString().padStart(2, "0")}
+          {time.hours.toString().padStart(2, "0")} :{" "}
+          {time.minutes.toString().padStart(2, "0")} :{" "}
+          {time.seconds.toString().padStart(2, "0")}
         </h4>
       </div>
     </div>
