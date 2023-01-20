@@ -23,9 +23,9 @@ const Days = () => {
           <h3>Puzzle Days</h3>
         </div>
         <div className="day-content">
-          {words.map((word) => (
+          {words?.map((word) => (
             <button
-              key={word.id}
+              key={word._id}
               className="days-btn"
               onClick={() => navigate(`/home/${word.day}`)}
             >

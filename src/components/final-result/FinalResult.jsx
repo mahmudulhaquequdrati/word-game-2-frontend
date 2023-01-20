@@ -7,7 +7,8 @@ import "./FinalResult.css";
 const FinalResult = () => {
   const navigate = useNavigate();
   const {state} = useLocation();
-  const handleHome = () => {
+  const handleHomeAndCompletedTask = () => {
+    
     navigate("/days");
   };
   return (
@@ -40,7 +41,7 @@ const FinalResult = () => {
           fontWeight: "bold",
           margin: "10px",
         }}
-        onClick={handleHome}
+        onClick={handleHomeAndCompletedTask}
       >
         Home
       </button>
