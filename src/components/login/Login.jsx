@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,8 +12,17 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    localStorage.setItem("user", true);
-    navigate("/days");
+    // localStorage.setItem("user", true);
+   const userInfo = {
+      email: email,
+      password: password
+    }
+    axios.post("http://localhost:5000/users/login",userInfo).then(res => {
+      console.log(res.data)
+      navigate("/days");
+    }).catch(err =>{
+      console.log(err);
+    })
   };
 
   return (
