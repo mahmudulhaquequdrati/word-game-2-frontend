@@ -1,29 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Days.css";
 
 const Days = () => {
+
+  const mainDate = '20';
   const navigate = useNavigate();
-  const days = [
-    {
-      day: "1",
-    },
-    {
-      day: "2",
-    },
-    {
-      day: "3",
-    },
-    {
-      day: "4",
-    },
-    {
-      day: "5",
-    },
-    {
-      day: "6",
-    },
-  ];
+  const [date, setDate] = useState(1);
+  const increment = () => {
+    setDate((data) => data + 1)
+  }
   return (
     <div className="body">
       <div className="days-container">
@@ -32,12 +18,15 @@ const Days = () => {
         </div>
         <div className="day-content">
           {" "}
-          {days.map((day) => (
             <Link to="/home">
-              <button className="days-btn">Day {day.day}</button>
-            </Link>
-          ))}
+              {Array.from({ length: date}).map(
+                (_,i) => (
+                  <button className="days-btn">Day {i+1}</button>
+                )
+              )}
+            </Link>       
         </div>
+        <button onClick={increment}>+</button>
       </div>
     </div>
   );
