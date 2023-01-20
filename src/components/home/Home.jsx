@@ -4,11 +4,7 @@ import "./Home.css";
 
 const Home = () => {
   return (
-<<<<<<< HEAD
-    <div>
-=======
     <div className="top-conatiner">
->>>>>>> 9ca6fdba76238ec2d1c86935dc6147687104c049
       <div className="context">
         <div>
           <div>
@@ -21,8 +17,8 @@ const Home = () => {
         </Link>
       </div>
 
-      <div class="area">
-        <ul class="circles">
+      <div className="area">
+        <ul className="circles">
           <li>A</li>
           <li>L</li>
           <li>Z</li>

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import BtnComponent from "../stopwatch/btn-component/BtnComponent";
 import Display from "../stopwatch/display/Display";
 import "./FinalResult.css";
 
 const FinalResult = () => {
   const navigate = useNavigate();
+  const {state} = useLocation();
   const handleHome = () => {
     navigate("/days");
   };
@@ -24,6 +25,7 @@ const FinalResult = () => {
         </div>
         <div>
           <p>Total time</p>
+          <p>{state}</p>
         </div>
       </div>
       <button

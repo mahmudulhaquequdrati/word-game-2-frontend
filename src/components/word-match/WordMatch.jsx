@@ -1,69 +1,49 @@
 import React, { useEffect, useState } from "react";
-import BtnComponent from "../stopwatch/btn-component/BtnComponent";
-import Display from "../stopwatch/display/Display";
 import Output from "./Output";
-
 import "./WordMatch.css";
 
 const words = ["BAR"];
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
 const WordMatch = () => {
-  //*!Stpowatch Function
-  const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
-  const [interv, setInterv] = useState();
-  const [status, setStatus] = useState(0);
-  const [text, setText] = useState("");
-  console.log(text);
-  // Not started = 0
-  // started = 1
-  // stopped = 2
+//  -----------stop wacht code stard-------- //
+const [time, setTime] = useState({
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+});
+const [isRunning, setIsRunning] = useState(true);
+useEffect(() => {
+  let intervalId = null;
+  if (isRunning) {
+    intervalId = setInterval(() => {
+      setTime(prevTime => {
+        let { hours, minutes, seconds } = prevTime;
+        seconds++;
+        if (seconds === 60) {
+          seconds = 0;
+          minutes++;
+        }
+        if (minutes === 60) {
+          minutes = 0;
+          hours++;
+        }
+        return { hours, minutes, seconds };
+      });
+    }, 1000);
+  } else if (!isRunning && time !== 0) {
+    clearInterval(intervalId);
+  }
+  return () => clearInterval(intervalId);
+}, [isRunning, time]);
 
-  const start = () => {
-    run();
-    setStatus(1);
-    setInterv(setInterval(run, 10));
-  };
 
-  var updatedMs = time.ms,
-    updatedS = time.s,
-    updatedM = time.m,
-    updatedH = time.h;
+const  handleSave = () => {
+  let currentTime = `${time.hours.toString().padStart(2, "0")} : ${time.minutes.toString().padStart(2, "0")} : ${time.seconds.toString().padStart(2, "0")}`;
+  return currentTime;
+}
+// ---------------- stop wacht code end----------\\
 
-  const run = () => {
-    if (updatedM === 60) {
-      updatedH++;
-      updatedM = 0;
-    }
-    if (updatedS === 60) {
-      updatedM++;
-      updatedS = 0;
-    }
-    if (updatedMs === 100) {
-      updatedS++;
-      updatedMs = 0;
-    }
-    updatedMs++;
-    return setTime({
-      ms: updatedMs,
-      s: updatedS,
-      m: updatedM,
-      h: updatedH,
-    });
-  };
-
-  const stop = () => {
-    clearInterval(interv);
-    setStatus(2);
-  };
-
-  const reset = () => {
-    clearInterval(interv);
-    setStatus(0);
-    setTime({ ms: 0, s: 0, m: 0, h: 0 });
-  };
-
-  const resume = () => start();
 
   //*!Game Word Match Function
   const [playable, setPlayable] = useState(true);
@@ -94,7 +74,7 @@ const WordMatch = () => {
     window.addEventListener("keydown", handleKeydown);
 
     return () => window.removeEventListener("keydown", handleKeydown);
-  }, [correctLetters, wrongLetters, playable]);
+  }, [correctLetters, wrongLetters]);
 
   function playAgain() {
     setPlayable(true);
@@ -134,27 +114,16 @@ const WordMatch = () => {
             selectedWord={selectedWord}
             setPlayable={setPlayable}
             playAgain={playAgain}
+            handleSavetime={handleSave}
           />
         </div>
       </div>
 
       {/*-------------------------- StopWatch Section---------------------------- */}
-      <div className="time">
-        <div className="main-section">
-          <div className="clock-holder">
-            <div className="stopwatch">
-              <Display time={time} />
-              <BtnComponent
-                text={text}
-                status={status}
-                resume={resume}
-                reset={reset}
-                stop={stop}
-                start={start}
-              />
-            </div>
-          </div>
-        </div>
+      <div>
+        <h4>
+          {time.hours.toString().padStart(2, "0")} : {time.minutes.toString().padStart(2, "0")} : {time.seconds.toString().padStart(2, "0")}
+        </h4>
       </div>
     </div>
   );

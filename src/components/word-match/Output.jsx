@@ -8,15 +8,16 @@ const Output = ({
   selectedWord,
   setPlayable,
   playAgain,
+  handleSavetime,
 }) => {
   const navigate = useNavigate();
-
   let finalMessage = "";
   let finalMessageRevealWord = "";
   let playable = true;
 
   if (checkWin(correctLetters, wrongLetters, selectedWord) === "win") {
-    navigate("/result");
+    const savetime = handleSavetime();
+    navigate("/result", { state: savetime});
     playable = false;
   } else if (checkWin(correctLetters, wrongLetters, selectedWord) === "lose") {
     finalMessage = "Unfortunately you lost. 😕";
