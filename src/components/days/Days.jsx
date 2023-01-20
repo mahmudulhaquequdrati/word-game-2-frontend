@@ -1,15 +1,21 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import "./Days.css";
 
-const Days = () => {
 
-  const mainDate = '20';
+const Days = () => {
   const navigate = useNavigate();
-  const [date, setDate] = useState(1);
-  const increment = () => {
-    setDate((data) => data + 1)
-  }
+  const email = localStorage.getItem("email");
+  const {data : words} = useQuery({
+    queryKey : ["words"],
+    queryFn : ()=>axios.get(`http://localhost:5000/words?email=${email}`).then(res => res.data).catch(err => console.log(err))
+  })
+
+  const date = JSON.parse(localStorage.getItem("user"))?.date;
+  // console.log(date);
+
   return (
     <div className="body">
       <div className="days-container">
@@ -17,16 +23,16 @@ const Days = () => {
           <h3>Puzzle Days</h3>
         </div>
         <div className="day-content">
-          {" "}
-            <Link to="/home">
-              {Array.from({ length: date}).map(
-                (_,i) => (
-                  <button className="days-btn">Day {i+1}</button>
-                )
-              )}
-            </Link>       
+          {words.map((word) => (
+            <button
+              key={word.id}
+              className="days-btn"
+              onClick={() => navigate(`/home/${word.day}`)}
+            >
+              Day {word.day}
+            </button>
+          ))}
         </div>
-        <button onClick={increment}>+</button>
       </div>
     </div>
   );

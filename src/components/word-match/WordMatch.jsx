@@ -1,52 +1,80 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Output from "./Output";
 import "./WordMatch.css";
 
-const words = ["BAR"];
-let selectedWord = words[Math.floor(Math.random() * words.length)];
-
 const WordMatch = () => {
-//  -----------stop wacht code stard-------- //
-const [time, setTime] = useState({
-  hours: 0,
-  minutes: 0,
-  seconds: 0,
-});
-const [isRunning, setIsRunning] = useState(true);
-useEffect(() => {
-  let intervalId = null;
-  if (isRunning) {
-    intervalId = setInterval(() => {
-      setTime(prevTime => {
-        let { hours, minutes, seconds } = prevTime;
-        seconds++;
-        if (seconds === 60) {
-          seconds = 0;
-          minutes++;
-        }
-        if (minutes === 60) {
-          minutes = 0;
-          hours++;
-        }
-        return { hours, minutes, seconds };
-      });
-    }, 1000);
-  } else if (!isRunning && time !== 0) {
-    clearInterval(intervalId);
-  }
-  return () => clearInterval(intervalId);
-}, [isRunning, time]);
+  const [selectedWord, setSelectedWord] = useState("");
 
+  const { day } = useParams();
 
-const  handleSave = () => {
-  let currentTime = `${time.hours.toString().padStart(2, "0")} : ${time.minutes.toString().padStart(2, "0")} : ${time.seconds.toString().padStart(2, "0")}`;
-  return currentTime;
-}
-// ---------------- stop wacht code end----------\\
+  const words = [
+    {
+      word: ["BAR"],
+      day: 1,
+      completed: false,
+      time: 24,
+    },
+    {
+      word: ["MOON"],
+      day: 2,
+      completed: false,
+      time: 48,
+    },
+    {
+      word: ["SUN"],
+      day: 3,
+      completed: false,
+      time: 72,
+    },
+  ];
+  const word = words.find((word) => word.day === parseInt(day));
+  useEffect(() => {
+    setSelectedWord(word?.word[Math.floor(Math.random() * word?.word?.length)]);
+  }, [word]);
 
+  //  -----------stop wacht code stard-------- //
+  const [time, setTime] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+  const [isRunning, setIsRunning] = useState(true);
+  useEffect(() => {
+    let intervalId = null;
+    if (isRunning) {
+      intervalId = setInterval(() => {
+        setTime((prevTime) => {
+          let { hours, minutes, seconds } = prevTime;
+          seconds++;
+          if (seconds === 60) {
+            seconds = 0;
+            minutes++;
+          }
+          if (minutes === 60) {
+            minutes = 0;
+            hours++;
+          }
+          return { hours, minutes, seconds };
+        });
+      }, 1000);
+    } else if (!isRunning && time !== 0) {
+      clearInterval(intervalId);
+    }
+    return () => clearInterval(intervalId);
+  }, [isRunning, time]);
+
+  const handleSave = () => {
+    let currentTime = `${time.hours
+      .toString()
+      .padStart(2, "0")} : ${time.minutes
+      .toString()
+      .padStart(2, "0")} : ${time.seconds.toString().padStart(2, "0")}`;
+    return currentTime;
+  };
+  // ---------------- stop wacht code end----------\\
 
   //*!Game Word Match Function
-  const [playable, setPlayable] = useState(true);
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
@@ -54,13 +82,13 @@ const  handleSave = () => {
   useEffect(() => {
     const handleKeydown = (event) => {
       const { key, keyCode } = event;
-      if (playable && keyCode >= 65 && keyCode <= 90) {
+      if (keyCode >= 65 && keyCode <= 90) {
         const letter = key.toUpperCase();
         if (selectedWord.includes(letter)) {
           if (!correctLetters.includes(letter)) {
             setCorrectLetters((currentLetters) => [...currentLetters, letter]);
           } else {
-            alert("ok");
+            // alert("ok");
           }
         } else {
           if (!wrongLetters.includes(letter)) {
@@ -76,17 +104,6 @@ const  handleSave = () => {
     return () => window.removeEventListener("keydown", handleKeydown);
   }, [correctLetters, wrongLetters]);
 
-  function playAgain() {
-    setPlayable(true);
-
-    // Empty Arrays
-    setCorrectLetters([]);
-    setWrongLetters([]);
-
-    const random = Math.floor(Math.random() * words.length);
-    selectedWord = words[random];
-  }
-
   return (
     <div className="box">
       <h1>Pass Gas</h1>
@@ -98,7 +115,7 @@ const  handleSave = () => {
       <div>
         {" "}
         <div className="word">
-          {selectedWord.split("").map((letter, i) => {
+          {selectedWord?.split("")?.map((letter, i) => {
             return (
               <span className="letter" key={i}>
                 {correctLetters.includes(letter) ? letter : ""}
@@ -112,8 +129,6 @@ const  handleSave = () => {
             correctLetters={correctLetters}
             wrongLetters={wrongLetters}
             selectedWord={selectedWord}
-            setPlayable={setPlayable}
-            playAgain={playAgain}
             handleSavetime={handleSave}
           />
         </div>
@@ -122,7 +137,9 @@ const  handleSave = () => {
       {/*-------------------------- StopWatch Section---------------------------- */}
       <div>
         <h4>
-          {time.hours.toString().padStart(2, "0")} : {time.minutes.toString().padStart(2, "0")} : {time.seconds.toString().padStart(2, "0")}
+          {time.hours.toString().padStart(2, "0")} :{" "}
+          {time.minutes.toString().padStart(2, "0")} :{" "}
+          {time.seconds.toString().padStart(2, "0")}
         </h4>
       </div>
     </div>

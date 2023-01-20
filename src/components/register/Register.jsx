@@ -5,7 +5,7 @@ import "./Regsiter.css";
 
 const Register = () => {
   const navigate = useNavigate();
-  const startDate = new Date().toLocaleDateString();
+  const date = new Date().toLocaleDateString();
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -19,10 +19,10 @@ const Register = () => {
       user_name: name,
       email: email,
       password: password,
-      startDate,
+      date,
     };
 
-    fetch("http://localhost:5000/users", {
+    fetch("http://localhost:5000/users/register", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,7 +20,23 @@ const Login = () => {
     }
     axios.post("http://localhost:5000/users/login",userInfo).then(res => {
       console.log(res.data)
-      navigate("/days");
+      if(res?.data?.message === "incorrect password"){
+        toast.error("incorrect password")
+      }
+      if(res?.data?.message === "Please input valid email"){
+        toast.error("Please input valid email")
+      }
+      if(res?.data?.message === "login successful"){
+        // console.log(res?.data?.email)
+        localStorage.setItem("email", res?.data?.email)
+        toast.success("Login successful")
+        navigate("/days");
+       localStorage.setItem(
+      "user",
+      JSON.stringify({ value: true, date: new Date().toLocaleDateString() })
+    );
+      }
+    
     }).catch(err =>{
       console.log(err);
     })
