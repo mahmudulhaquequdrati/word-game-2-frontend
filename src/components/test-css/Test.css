@@ -2,10 +2,7 @@
   margin-bottom: 120px;
 }
 .context {
-  margin-top: 100px;
   width: 100%;
-  /* position: absolute; */
-  position: static;
   border: 2px solid #fff;
   padding: 50px;
 }
@@ -147,8 +144,6 @@
 @media only screen and (max-width: 600px) {
   .context {
     margin-top: 100px;
-    /* width: 100%; */
-    /* position: absolute; */
     position: static;
     border: 2px solid #fff;
     padding: 30px;
