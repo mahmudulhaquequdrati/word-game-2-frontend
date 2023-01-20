@@ -1,11 +1,38 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Output from "./Output";
 import "./WordMatch.css";
 
-const words = ["BAR"];
-let selectedWord = words[Math.floor(Math.random() * words.length)];
-
 const WordMatch = () => {
+  const [selectedWord, setSelectedWord] = useState("");
+
+  const { day } = useParams();
+
+  const words = [
+    {
+      word: ["BAR"],
+      day: 1,
+      completed: false,
+      time: 24,
+    },
+    {
+      word: ["MOON"],
+      day: 2,
+      completed: false,
+      time: 48,
+    },
+    {
+      word: ["SUN"],
+      day: 3,
+      completed: false,
+      time: 72,
+    },
+  ];
+  const word = words.find((word) => word.day === parseInt(day));
+  useEffect(() => {
+    setSelectedWord(word?.word[Math.floor(Math.random() * word?.word?.length)]);
+  }, [word]);
+
   //  -----------stop wacht code stard-------- //
   const [time, setTime] = useState({
     hours: 0,
@@ -48,7 +75,6 @@ const WordMatch = () => {
   // ---------------- stop wacht code end----------\\
 
   //*!Game Word Match Function
-  const [playable, setPlayable] = useState(true);
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
@@ -56,7 +82,7 @@ const WordMatch = () => {
   useEffect(() => {
     const handleKeydown = (event) => {
       const { key, keyCode } = event;
-      if (playable && keyCode >= 65 && keyCode <= 90) {
+      if (keyCode >= 65 && keyCode <= 90) {
         const letter = key.toUpperCase();
         if (selectedWord.includes(letter)) {
           if (!correctLetters.includes(letter)) {
@@ -78,17 +104,6 @@ const WordMatch = () => {
     return () => window.removeEventListener("keydown", handleKeydown);
   }, [correctLetters, wrongLetters]);
 
-  function playAgain() {
-    setPlayable(true);
-
-    // Empty Arrays
-    setCorrectLetters([]);
-    setWrongLetters([]);
-
-    const random = Math.floor(Math.random() * words.length);
-    selectedWord = words[random];
-  }
-
   return (
     <div className="box">
       <h1>Pass Gas</h1>
@@ -100,7 +115,7 @@ const WordMatch = () => {
       <div>
         {" "}
         <div className="word">
-          {selectedWord.split("").map((letter, i) => {
+          {selectedWord?.split("")?.map((letter, i) => {
             return (
               <span className="letter" key={i}>
                 {correctLetters.includes(letter) ? letter : ""}
@@ -114,8 +129,6 @@ const WordMatch = () => {
             correctLetters={correctLetters}
             wrongLetters={wrongLetters}
             selectedWord={selectedWord}
-            setPlayable={setPlayable}
-            playAgain={playAgain}
             handleSavetime={handleSave}
           />
         </div>

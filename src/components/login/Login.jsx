@@ -10,8 +10,10 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
-    localStorage.setItem("user", true);
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ value: true, date: new Date().toLocaleDateString() })
+    );
     navigate("/days");
   };
 

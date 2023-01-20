@@ -6,8 +6,6 @@ const Output = ({
   correctLetters,
   wrongLetters,
   selectedWord,
-  setPlayable,
-  playAgain,
   handleSavetime,
 }) => {
   const navigate = useNavigate();
@@ -17,7 +15,7 @@ const Output = ({
 
   if (checkWin(correctLetters, wrongLetters, selectedWord) === "win") {
     const savetime = handleSavetime();
-    navigate("/result", { state: savetime});
+    navigate("/result", { state: savetime });
     playable = false;
   } else if (checkWin(correctLetters, wrongLetters, selectedWord) === "lose") {
     finalMessage = "Unfortunately you lost. 😕";
@@ -25,9 +23,6 @@ const Output = ({
     playable = false;
   }
 
-  useEffect(() => {
-    setPlayable(playable);
-  });
   return (
     <div>
       <div
