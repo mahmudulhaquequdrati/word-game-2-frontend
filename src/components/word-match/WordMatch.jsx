@@ -44,7 +44,12 @@ const WordMatch = () => {
       updatedMs = 0;
     }
     updatedMs++;
-    return setTime({ ms: updatedMs, s: updatedS, m: updatedM, h: updatedH });
+    return setTime({
+      ms: updatedMs,
+      s: updatedS,
+      m: updatedM,
+      h: updatedH,
+    });
   };
 
   const stop = () => {
@@ -59,11 +64,6 @@ const WordMatch = () => {
   };
 
   const resume = () => start();
-
-  function handleChange(event) {
-    const texts = event.target.value;
-    setText(texts);
-  }
 
   //*!Game Word Match Function
   const [playable, setPlayable] = useState(true);
