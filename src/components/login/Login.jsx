@@ -20,7 +20,7 @@ const Login = () => {
       email: email,
       password: password
     }
-    axios.post("https://word-game-2-backend.vercel.app/users/login",userInfo).then(res => {
+    axios.post("http://localhost:5000/users/login",userInfo).then(res => {
       console.log(res.data)
       if(res?.data?.message === "incorrect password"){
         toast.error("incorrect password")

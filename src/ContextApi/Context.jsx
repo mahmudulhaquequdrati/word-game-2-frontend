@@ -14,12 +14,12 @@ const Context = ({children}) => {
     const email = localStorage.getItem("email");
     const {data : user , refetch : userRefetch} = useQuery({
         queryKey : ["user",email ],
-        queryFn : ()=>axios.get(`https://word-game-2-backend.vercel.app/users?email=${email}`).then(res => res.data.user).catch(err => console.log(err))
+        queryFn : ()=>axios.get(`http://localhost:5000/users?email=${email}`).then(res => res.data.user).catch(err => console.log(err))
       })
 
       const {data : words ,refetch : wordRefetch} = useQuery({
         queryKey : ["words"],
-        queryFn : ()=>axios.get(`https://word-game-2-backend.vercel.app/words?email=${email}`).then(res => res.data).catch(err => console.log(err))
+        queryFn : ()=>axios.get(`http://localhost:5000/words?email=${email}`).then(res => res.data).catch(err => console.log(err))
       })
 
     const information ={

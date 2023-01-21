@@ -13,11 +13,11 @@ import Context from './ContextApi/Context'
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <QueryClientProvider client={queryClient}>
     <Context>
     <App />
     </Context>
     </QueryClientProvider>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 )

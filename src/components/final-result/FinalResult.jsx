@@ -12,7 +12,7 @@ const FinalResult = () => {
   const {user,wordRefetch} = useGStore()
   const email = localStorage.getItem("email");
   const handleHomeAndCompletedTask = () => {
-    axios.put(`https://word-game-2-backend.vercel.app/completed?email=${email}&day=${user.day}`).then(res => {
+    axios.put(`http://localhost:5000/completed?email=${email}&day=${user.day}`).then(res => {
       console.log(res.data)
       wordRefetch()
       navigate("/days");
