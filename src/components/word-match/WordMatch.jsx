@@ -1,34 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useGStore } from "../../ContextApi/Context";
 import Output from "./Output";
 import "./WordMatch.css";
 
 const WordMatch = () => {
   const [selectedWord, setSelectedWord] = useState("");
-
+  const {user , words} = useGStore();
   const { day } = useParams();
-
-  const words = [
-    {
-      word: ["BAR"],
-      day: 1,
-      completed: false,
-      time: 24,
-    },
-    {
-      word: ["MOON"],
-      day: 2,
-      completed: false,
-      time: 48,
-    },
-    {
-      word: ["SUN"],
-      day: 3,
-      completed: false,
-      time: 72,
-    },
-  ];
   const word = words.find((word) => word.day === parseInt(day));
+  // console.log()
   useEffect(() => {
     setSelectedWord(word?.word[Math.floor(Math.random() * word?.word?.length)]);
   }, [word]);
@@ -108,7 +89,7 @@ const WordMatch = () => {
     <div className="box">
       <h1>Pass Gas</h1>
       <div>
-        <p>Fishy name of former west village bar</p>
+        <p>Fishy name of former west village {word.word[0]}</p>
       </div>
 
       {/*-------------------------- Word Match Box Section ------------------------- */}

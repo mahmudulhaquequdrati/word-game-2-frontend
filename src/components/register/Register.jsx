@@ -22,7 +22,7 @@ const Register = () => {
       date,
     };
 
-    fetch("http://localhost:5000/users/register", {
+    fetch("https://word-game-2-backend.vercel.app/users/register", {
       method: "POST",
       headers: {
         "content-type": "application/json",
