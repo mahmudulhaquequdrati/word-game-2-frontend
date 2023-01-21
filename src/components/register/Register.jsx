@@ -1,8 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import "./Regsiter.css";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const date = new Date().toLocaleDateString();
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -11,6 +14,32 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(name, email, password);
+    const users = {
+      // item_name: phone_details.phone_name,
+      user_name: name,
+      email: email,
+      password: password,
+      date,
+    };
+
+    fetch("https://word-game-2-backend.vercel.app/users/register", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(users),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          toast.success("Register Successfully")
+          navigate("/login");
+        } 
+else {
+         toast.error("Please enter valid input");
+        }
+      });
   };
 
   return (

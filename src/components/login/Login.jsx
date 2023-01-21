@@ -1,6 +1,10 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,11 +14,34 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    localStorage.setItem(
+    console.log(email, password);
+    // localStorage.setItem("user", true);
+   const userInfo = {
+      email: email,
+      password: password
+    }
+    axios.post("https://word-game-2-backend.vercel.app/users/login",userInfo).then(res => {
+      console.log(res.data)
+      if(res?.data?.message === "incorrect password"){
+        toast.error("incorrect password")
+      }
+      if(res?.data?.message === "Please input valid email"){
+        toast.error("Please input valid email")
+      }
+      if(res?.data?.message === "login successful"){
+        // console.log(res?.data?.email)
+        localStorage.setItem("email", res?.data?.email)
+        toast.success("Login successful")
+        navigate("/days");
+       localStorage.setItem(
       "user",
       JSON.stringify({ value: true, date: new Date().toLocaleDateString() })
     );
-    navigate("/days");
+      }
+    
+    }).catch(err =>{
+      console.log(err);
+    })
   };
 
   return (
